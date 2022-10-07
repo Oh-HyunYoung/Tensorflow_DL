@@ -71,3 +71,4 @@ ada_train = accuracy_score(y_train, y_train_ada_pred)
 ada_test = accuracy_score(y_test, y_test_ada_pred) 
 print('에이다부스트의 훈련 정확도/테스트 정확도 %.3f/%.3f' % (ada_train, ada_test))
 
+
