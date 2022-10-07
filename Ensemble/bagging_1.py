@@ -3,38 +3,8 @@ import numpy as np
 import pandas as pd
 
 ## 1. data load
-'''
-df_all_1 = pd.read_csv('../ECG_data/feature/All.csv',header=None)
-rhythmAll = ['AFIB','GSVT','SB','SR']
-
-df1 = pd.read_csv('../ECG_data/feature/AFIB.csv',header=None) 
-df2 = pd.read_csv('../ECG_data/feature/GSVT.csv',header=None) 
-df3 = pd.read_csv('../ECG_data/feature/SB.csv',header=None) 
-df4 = pd.read_csv('../ECG_data/feature/SR.csv',header=None) 
-
-AFIB = np.zeros(len(df1))
-GSVT = np.ones(len(df2))
-SB = np.full((len(df3)),2)
-SR = np.full((len(df4)),3) 
-arr = np.concatenate([AFIB,GSVT,SB,SR],axis=0)
-
-X = df_all_1.loc[:]
-y = arr
-'''
-'''
-df = pd.read_csv('../PPGdata_features.csv',header=None)
-
-X = df.loc[:,1:12]
-y = df.loc[:,13]
-'''
-'''
-df = pd.read_csv('../PPG_features.csv',header=None)
-
-X = df.loc[:,1:16]
-y = df.loc[:,17]
-'''
-df = pd.read_csv('../detect_sort.csv',header=None)
-target = pd.read_csv('../target.csv',header=None)
+df = pd.read_csv('..csv',header=None)  # 해당하는 csv파일 불러오기 또는 데이터 로드
+target = pd.read_csv('..csv',header=None)
 
 X = df.loc[:]
 y = target.loc[1:,1]
@@ -122,3 +92,4 @@ print("test data f1 score: %.3f" %f1_score(y_test, y_test_bag_pred, average='wei
 print("test data AUC: %.3f" %roc_auc_score(y_test, y_test_bag_prob, multi_class='ovr'))
 print("test data Confusion matrix:")
 print(confusion_matrix(y_test, y_test_bag_pred))
+
