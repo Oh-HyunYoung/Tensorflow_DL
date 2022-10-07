@@ -4,8 +4,8 @@ import pandas as pd
 
 ## 1. data load
 
-df = pd.read_csv('../detect_sort.csv',header=None)
-target = pd.read_csv('../target.csv',header=None)
+df = pd.read_csv('...csv',header=None)  # 해당하는 csv파일 불러오기 또는 데이터 로드
+target = pd.read_csv('...csv',header=None)
 
 X = df.loc[:]
 y = target.loc[1:,1]
@@ -64,3 +64,4 @@ print("test data f1 score: %.3f" %f1_score(y_test,y_test_xgb_pred, average='weig
 print("test data AUC: %.3f" %roc_auc_score(y_test, y_test_xgb_prob, multi_class='ovr'))
 print("test data Confusion matrix:")
 print(confusion_matrix(y_test,y_test_xgb_pred))
+
