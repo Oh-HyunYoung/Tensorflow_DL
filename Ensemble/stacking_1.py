@@ -3,25 +3,7 @@ import numpy as np
 import pandas as pd
 
 ## 1. data load
-'''
-df_all_1 = pd.read_csv('../ECG_data/feature/All.csv',header=None)
-rhythmAll = ['AFIB','GSVT','SB','SR']
-
-df1 = pd.read_csv('../ECG_data/feature/AFIB.csv',header=None) 
-df2 = pd.read_csv('../ECG_data/feature/GSVT.csv',header=None) 
-df3 = pd.read_csv('../ECG_data/feature/SB.csv',header=None) 
-df4 = pd.read_csv('../ECG_data/feature/SR.csv',header=None) 
-
-AFIB = np.zeros(len(df1))
-GSVT = np.ones(len(df2))
-SB = np.full((len(df3)),2)
-SR = np.full((len(df4)),3) 
-arr = np.concatenate([AFIB,GSVT,SB,SR],axis=0)
-
-X = df_all_1.loc[:]
-y = arr
-'''
-df = pd.read_csv('../PPGdata_new_features.csv',header=None)
+df = pd.read_csv('...csv',header=None)  # 해당하는 csv파일 불러오기 또는 데이터 로드
 
 X = df.loc[:,1:19]
 y = df.loc[:,20]
