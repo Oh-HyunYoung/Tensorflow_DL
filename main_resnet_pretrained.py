@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov  1 16:09:10 2021
-
-@author: admin
-"""
+# ResNet50
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,14 +48,14 @@ for i in range(1,13):
     image_size = IMAGE_RESIZE
     data_generator = ImageDataGenerator(preprocessing_function=preprocess_input)
     
-    tr_dir = 'F:/인제대학교/3-2/DL자료/DL/spectrogram/' + leadFolder + '/Train'
+    tr_dir = '../' + leadFolder + '/Train'
     train_generator = data_generator.flow_from_directory(
             tr_dir,
             target_size=(image_size, image_size),
             batch_size=BATCH_SIZE,
             class_mode='categorical')
     
-    val_dir = 'F:/인제대학교/3-2/DL자료/DL/spectrogram/' + leadFolder + '/Val'
+    val_dir = '../' + leadFolder + '/Val'
     validation_generator = data_generator.flow_from_directory(
             val_dir,
             target_size=(image_size, image_size),
@@ -134,7 +130,7 @@ for i in range(1,13):
     
     plt.show()
     
-    tst_dir = 'F:/인제대학교/3-2/DL자료/DL/spectrogram/' + leadFolder + '/Test'
+    tst_dir = '../' + leadFolder + '/Test'
     test_generator = data_generator.flow_from_directory(
         directory = tst_dir,
         target_size = (image_size, image_size),
@@ -199,6 +195,6 @@ df = pd.DataFrame([accuracy, AUCs, recall_macro, precision_macro, f1score_macro,
 
 # write excel file
 fileName = 'results_resnet50_lr'+str(lr)+'.xlsx'
-df.to_excel('./ECG2grayImg_trValTst/'+fileName)
+df.to_excel('../ECG2grayImg_trValTst/'+fileName)
 
 
