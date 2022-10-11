@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 NUM_CLASSES = 4
-IMAGE_RESIZE = 224
+IMAGE_RESIZE = 299
 NUM_EPOCHS = 1000
 EARLY_STOP_PATIENCE = 20 # EARLY_STOP_PATIENCE must be < NUM_EPOCHS
 BATCH_SIZE = 32
@@ -42,20 +42,19 @@ for i in range(1,13):
     
     ## data load
     from tensorflow.keras.applications.inception_resnet_v2 import preprocess_input
-#    from tensorflow.keras.applications.resnet50 import preprocess_input
     from tensorflow.keras.preprocessing.image import ImageDataGenerator
     
     image_size = IMAGE_RESIZE
     data_generator = ImageDataGenerator(preprocessing_function=preprocess_input)
     
-    tr_dir = 'C:/Users/f1003/Desktop/hy/scalogram/' + leadFolder + '/Train'
+    tr_dir = '../' + leadFolder + '/Train'
     train_generator = data_generator.flow_from_directory(
             tr_dir,
             target_size=(image_size, image_size),
             batch_size=BATCH_SIZE,
             class_mode='categorical')
     
-    val_dir = 'C:/Users/f1003/Desktop/hy/scalogram/' + leadFolder + '/Val'
+    val_dir = '../' + leadFolder + '/Val'
     validation_generator = data_generator.flow_from_directory(
             val_dir,
             target_size=(image_size, image_size),
@@ -67,7 +66,6 @@ for i in range(1,13):
     ## model setup
     from tensorflow.keras.models import Sequential
     from tensorflow.keras.applications import InceptionResNetV2
-#    from tensorflow.keras.applications import ResNet50
     from tensorflow.keras.layers import Dense, GlobalMaxPool2D, GlobalAveragePooling2D
     from tensorflow.keras import optimizers
     from tensorflow.python.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -91,7 +89,7 @@ for i in range(1,13):
     
     
     cb_early_stopper = EarlyStopping(monitor = 'val_loss', patience = EARLY_STOP_PATIENCE)
-    cb_checkpointer = ModelCheckpoint(filepath = 'C:/Users/f1003/Desktop/hy/scalogram/working/'+leadFolder+'/0.001_InceptionResNetV2_32.hdf5', 
+    cb_checkpointer = ModelCheckpoint(filepath = '../working/'+leadFolder+'/0.001_InceptionResNetV2_32.hdf5', 
                                       monitor = 'val_loss', 
                                       save_best_only = True, 
                                       mode = 'auto')
@@ -106,7 +104,7 @@ for i in range(1,13):
             callbacks=[cb_checkpointer, cb_early_stopper]
     )
     
-    model.load_weights("C:/Users/f1003/Desktop/hy/scalogram/working/"+leadFolder+"/0.001_InceptionResNetV2_32.hdf5")
+    model.load_weights(../working/"+leadFolder+"/0.001_InceptionResNetV2_32.hdf5")
     
     
     print(fit_history.history.keys())
@@ -131,7 +129,7 @@ for i in range(1,13):
     
     plt.show()
     
-    tst_dir = 'C:/Users/f1003/Desktop/hy/scalogram/' + leadFolder + '/Test'
+    tst_dir = '../' + leadFolder + '/Test'
     test_generator = data_generator.flow_from_directory(
         directory = tst_dir,
         target_size = (image_size, image_size),
@@ -195,7 +193,7 @@ df = pd.DataFrame([accuracy, AUCs, recall_macro, precision_macro, f1score_macro,
 
 
 # write excel file
-fileName = 'sc_results_InceptionResNetV2_lr'+str(lr)+'.xlsx'
-df.to_excel('C:/Users/f1003/Desktop/hy/scalogram/ECG2grayImg_trValTst/'+fileName)
+fileName = 'results_InceptionResNetV2_lr'+str(lr)+'.xlsx'
+df.to_excel('../'+fileName)
 
 
